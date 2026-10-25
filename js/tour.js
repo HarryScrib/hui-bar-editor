@@ -112,10 +112,11 @@
 		function build() {
 			var path = '<b>' + esc(A.PATH) + '</b>', rail = railSpell();
 			return [
-				{ t: 'Ranks on the left', at: function () { return [railRow(rail)].filter(Boolean); }, view: { hot: rail }, prefer: 'right',
+				// 0.6.21 (Harry: "box the section in question", and his words): the whole rail lit, the row's Highest the word
+				{ t: 'Ranks on the left', at: function () { return [q('.col.spells')].filter(Boolean); }, view: { hot: rail }, prefer: 'right',
 					c: { rstep: function () { var r = railRow(rail); return r && r.querySelector('.rstep'); } },
-					b: 'An ability’s rank can be changed on the left rail before slotting it onto the grid: hover it and use the '
-						+ w('rstep', 'arrows') + ' beside it. Highest always uses your best rank.' },
+					b: 'Skills can have their rank selected on the rail. If ' + w('rstep', 'Highest') + ' is selected, then the HUIPresets addon '
+						+ 'will update the rank as new ranks are learnt in game automatically.' },
 				// 0.6.17 (Harry, Oct 25: "i want all of the tutorial writing to be quick and informative like this. you are over
 				// explaining a lot"): his own words for Mouse buttons, Mouseover macro and Keybind mode, the rest in the same few lines
 				{ t: 'Mouse buttons', at: function () { return [q('.kpane')]; }, view: { keys: true },

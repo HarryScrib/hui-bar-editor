@@ -120,9 +120,9 @@
 				{ t: 'Mouseover macro', at: function () { return [$('slothead'), $('macrorow')].filter(Boolean); }, view: { sel: pinPlace() },
 					c: { mo: function () { return act('momacro', '#macrorow'); } },
 					b: 'Mouseover macros can be created easily by taking an ability from the left side rail and slotting it onto the grid, '
-						+ 'and then clicking on the ability and pressing ' + w('mo', 'Mouseover') + '. Be sure to select <b>Account</b> or <b>Character</b> '
+						+ 'and then clicking on the ability and pressing ' + w('mo', 'Mouseover') + '. Be sure to select <b class="cw">Account</b> or <b class="cw">Character</b> '
 						+ 'from the bottom of the macro palette first.' },
-				{ t: 'Ranks', at: function () { return [$('autorow'), $('rankrow')]; }, view: { sel: pinPlace() },
+				{ t: 'Ranks', at: function () { return [$('autorow'), $('rankrow')]; }, view: { sel: pinPlace() }, prefer: 'below',
 					c: { auto: function () { return act('auto', '#autorow'); }, pinrank: function () { return act('pinrank', '#rankrow') || q('#rankrow .rc > *'); } },
 					b: 'Buttons use your highest rank and update when you train. To keep a lower rank, untick ' + w('auto', 'Auto rank')
 						+ ' and pick the ' + w('pinrank', 'Rank') + '.' },
@@ -352,7 +352,9 @@
 			var ax = clampN((hole.l + hole.r) / 2 - p.x, 14, p.w - 14);
 			return [p.x + ax, p.side === 'below' ? p.y : p.y + p.h];
 		}
-		function place(box, hole, ts, ctls, obst) {
+		// 0.6.19 (Harry, Oct 25: the Ranks box at the top right, over the band - "it should be over the relevant area"): a
+		// step's prefer ('below', 'right' ...) puts its places on that side first, where its lines can be drawn
+		function place(box, hole, ts, ctls, obst, prefer) {
 			var W = innerWidth, H = innerHeight, w0 = Math.round(372 * ts), wmin = Math.round(290 * ts);
 			var hs = {};
 			var measure = function (w) {
@@ -370,7 +372,7 @@
 				if (r.l < M - .5 || r.t < M - .5 || r.r > W - M + .5 || r.b > H - M + .5) return false;
 				return keepOff.every(function (k) { return apart(r, k); });
 			};
-			var add = function (p, base) { if (free(p)) { p.base = base; cands.push(p); } };
+			var add = function (p, base) { if (free(p)) { p.base = base - (prefer && p.side === prefer ? 200 : 0); cands.push(p); } };
 			// along a side: its usual place, then moved by steps and to where a control's middle meets the box's edge
 			var room = { right: W - M - hole.r - GAP, left: hole.l - GAP - M };
 			['right', 'left'].forEach(function (sd, si) {
@@ -535,7 +537,7 @@
 				ctls.push({ k: c.k, el: c.el, r: v, self: self, inHole: !!r && inside(v, r) });
 			});
 			var t0 = performance.now();
-			var p = place(box, r, ts, ctls, obstacles(ctls));
+			var p = place(box, r, ts, ctls, obstacles(ctls), (T.steps[T.i - 1] || {}).prefer);
 			T.ms = performance.now() - t0;
 			box.style.width = p.w + 'px';
 			box.style.left = p.x + 'px';

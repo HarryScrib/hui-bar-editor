@@ -353,6 +353,7 @@ body.rowdragging .brow .bl.rowfixed{color:var(--dim)}
 #tour .tour-lines path{fill:none;stroke:rgba(176,132,240,.8);stroke-width:1.5}
 #tour .tour-lines circle{fill:rgba(176,132,240,.95)}
 #tour .tour-b b.c{color:rgb(176,132,240)}
+#tour .tour-b b.cw{color:rgb(176,132,240)}   /* 0.6.19: a control's word in purple that the step does not point at (Account, Character) */
 #tour .tour-box{position:fixed;z-index:1203;padding:11px 16px 14px 18px;border-radius:5px;font-size:calc(14px * var(--tts,1));line-height:1.4;color:#d9d5e2;
  background:radial-gradient(ellipse 60% 50% at 100% 0%,rgba(116,58,178,.14),transparent 70%),#0e0d11;
  box-shadow:inset 0 0 0 1px rgba(176,132,240,.22),0 18px 50px rgba(0,0,0,.75)}

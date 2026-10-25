@@ -104,35 +104,29 @@
 		function build() {
 			var path = '<b>' + esc(A.PATH) + '</b>';
 			return [
+				// 0.6.17 (Harry, Oct 25: "i want all of the tutorial writing to be quick and informative like this. you are over
+				// explaining a lot"): his own words for Mouseover macro and Keybind mode, the rest in the same few lines
 				{ t: 'Mouse buttons', at: function () { return [q('.kpane')]; }, view: { keys: true },
 					c: { keyboard: function () { return act('keyboard', '.band'); }, mouse: function () { return act('mousepick', '.kpane'); } },
-					b: 'The side buttons on your mouse take spells like keys, even if it has only two. ' + w('keyboard', 'Keyboard') + ' at the top opens this; '
-						+ 'in ' + w('mouse', 'Mouse') + ', pick Set buttons and press each side button once, so the editor knows what it sends. '
-						+ 'They show on the mouse as M1, M2 and so on: drop a button or a spell on one to bind it.' },
+					b: 'Mouse side buttons work like keys, even on a mouse with only two. Open ' + w('keyboard', 'Keyboard') + ', then '
+						+ w('mouse', 'Mouse') + ' › Set buttons, and press each side button once.' },
 				{ t: 'Keybind mode', at: function () { return [act('kbmode', '.band'), $('keyrow')].filter(Boolean); }, view: { sel: pinPlace() },
 					c: { kbmode: function () { return act('kbmode', '.band'); }, layer: function () { return act('layer', '#keyrow'); } },
-					b: 'To bind a lot at once, turn on ' + w('kbmode', 'Keybind mode') + ': click a button, press its key (with Shift, Ctrl or Alt, or a mouse button), '
-						+ 'then the next button and its key. Escape stops.'
-						+ '<p>A browser shortcut in the way (Ctrl+T)? Pick Ctrl in ' + w('layer', 'None, Shift, Ctrl, Alt') + ', then press T.</p>' },
+					b: 'Turn on ' + w('kbmode', 'Keybind mode') + ', click a button, then press its key. Escape stops. '
+						+ 'Due to browsers having their own shortcuts (Ctrl + W, for example), the ' + w('layer', 'modifier') + ' must be selected from below the grid first.' },
 				{ t: 'Mouseover macro', at: function () { return [$('slothead'), $('macrorow')].filter(Boolean); }, view: { sel: pinPlace() },
 					c: { mo: function () { return act('momacro', '#macrorow'); } },
-					b: 'Click a button with a spell on it, then ' + w('mo', 'Mouseover') + ': the spell becomes a macro that casts on whoever your mouse is over, '
-						+ 'else your target, on the same key. It goes into Your macros, where you can change it.'
-						+ '<p>The macro maker’s <b>Account</b> or <b>Character</b> is the game’s macro tab it goes in: Account is shared by all your characters, '
-						+ 'Character is this one’s own. You never make them in game: HUIPresets makes them for you, and an Account macro you '
-						+ 'already have is used again, never made twice.</p>' },
+					b: 'Mouseover macros can be created easily by taking an ability from the left side rail and slotting it onto the grid, '
+						+ 'and then clicking on the ability and pressing ' + w('mo', 'Mouseover') + '. Be sure to select <b>Account</b> or <b>Character</b> '
+						+ 'from the bottom of the macro palette first.' },
 				{ t: 'Ranks', at: function () { return [$('autorow'), $('rankrow')]; }, view: { sel: pinPlace() },
 					c: { auto: function () { return act('auto', '#autorow'); }, pinrank: function () { return act('pinrank', '#rankrow') || q('#rankrow .rc > *'); } },
-					b: 'Every button uses the highest rank you know, and takes each new rank you train (' + w('auto', 'Auto rank') + '). '
-						+ 'To keep a lower one, such as Rank 1 of a heal, untick Auto rank and pick the ' + w('pinrank', 'Rank') + '. '
-						+ 'In game, Shift+right-click a button in the unlock or keybind mode to hold or free it.' },
+					b: 'Buttons use your highest rank and update when you train. To keep a lower rank, untick ' + w('auto', 'Auto rank')
+						+ ' and pick the ' + w('pinrank', 'Rank') + '.' },
 				{ t: 'Into the game', at: function () { var s = q('.foot .saves'); return [s && s.parentElement]; },
 					c: { get: function () { return q('.foot .getaddon'); }, save: function () { return act('savepre', '.foot'); } },
-					b: 'Get ' + w('get', 'HUIPresets.zip') + ' and unzip it into Interface\\AddOns, so you have Interface\\AddOns\\HUIPresets. '
-						+ 'It works alone, or beside HUI Bars, Bartender, ElvUI or Dominos.'
-						+ '<p>Pick your race, then ' + w('save', 'Download') + ': one file for this race and class, such as HumanPriest.lua. Move it into ' + path
-						+ ', replacing the empty one, and type <b>/reload</b> in game. A character of that race and class is asked <b>Apply</b>, <b>Not now</b> or <b>Never</b>. '
-						+ 'Nothing is applied in a fight.</p>' },
+					b: 'Unzip ' + w('get', 'HUIPresets.zip') + ' into Interface\\AddOns. Pick your race, press ' + w('save', 'Download')
+						+ ', and put the file in ' + path + ', replacing the empty one. Then <b>/reload</b> in game.' },
 			];
 		}
 

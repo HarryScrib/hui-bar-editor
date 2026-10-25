@@ -94,7 +94,9 @@
 		// miss like setting key mappings for mouse bindings (even if only a 2 side button mouse). how to quickly change
 		// something into a mouseover macro. only things that really make sense to put into tutorial. ie keybind mode too"):
 		// six steps, from 0.6.14's fourteen - what the page shows by itself (classes, races, the spells list, dragging, the
-		// Screen, the macro maker, Export) is left to the page
+		// Screen, the macro maker, Export) is left to the page. 0.6.16 (Harry, Oct 25: "you don't need the 6th tutorial tab";
+		// "in the macro info tutorial - explain that Account and Character tabs are there to be use, and the macros will be
+		// created by the addon"): five, the last one's Next says Done
 		function all(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
 		// 0.4.2: a control the text names: its word in the lines' purple, tied by key to the step's c (the control itself)
 		function w(k, t) { return '<b class="c" data-c="' + k + '">' + t + '</b>'; }
@@ -115,7 +117,10 @@
 				{ t: 'Mouseover macro', at: function () { return [$('slothead'), $('macrorow')].filter(Boolean); }, view: { sel: pinPlace() },
 					c: { mo: function () { return act('momacro', '#macrorow'); } },
 					b: 'Click a button with a spell on it, then ' + w('mo', 'Mouseover') + ': the spell becomes a macro that casts on whoever your mouse is over, '
-						+ 'else your target, on the same key. It goes into Your macros, where you can change it.' },
+						+ 'else your target, on the same key. It goes into Your macros, where you can change it.'
+						+ '<p>The macro maker’s <b>Account</b> or <b>Character</b> is the game’s macro tab it goes in: Account is shared by all your characters, '
+						+ 'Character is this one’s own. You never make them in game: HUIPresets makes them for you, and an Account macro you '
+						+ 'already have is used again, never made twice.</p>' },
 				{ t: 'Ranks', at: function () { return [$('autorow'), $('rankrow')]; }, view: { sel: pinPlace() },
 					c: { auto: function () { return act('auto', '#autorow'); }, pinrank: function () { return act('pinrank', '#rankrow') || q('#rankrow .rc > *'); } },
 					b: 'Every button uses the highest rank you know, and takes each new rank you train (' + w('auto', 'Auto rank') + '). '
@@ -128,9 +133,6 @@
 						+ '<p>Pick your race, then ' + w('save', 'Download') + ': one file for this race and class, such as HumanPriest.lua. Move it into ' + path
 						+ ', replacing the empty one, and type <b>/reload</b> in game. A character of that race and class is asked <b>Apply</b>, <b>Not now</b> or <b>Never</b>. '
 						+ 'Nothing is applied in a fight.</p>' },
-				{ t: 'Done', at: function () { return [act('tour', '.band')]; },
-					c: { tour: function () { return act('tour', '.band'); } },
-					b: 'That’s all. ' + w('tour', 'Tutorial') + ' is always up here if you want it again.' },
 			];
 		}
 

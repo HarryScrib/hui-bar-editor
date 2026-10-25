@@ -105,13 +105,16 @@
 			var path = '<b>' + esc(A.PATH) + '</b>';
 			return [
 				// 0.6.17 (Harry, Oct 25: "i want all of the tutorial writing to be quick and informative like this. you are over
-				// explaining a lot"): his own words for Mouseover macro and Keybind mode, the rest in the same few lines
+				// explaining a lot"): his own words for Mouse buttons, Mouseover macro and Keybind mode, the rest in the same few lines
 				{ t: 'Mouse buttons', at: function () { return [q('.kpane')]; }, view: { keys: true },
-					c: { keyboard: function () { return act('keyboard', '.band'); }, mouse: function () { return act('mousepick', '.kpane'); } },
-					b: 'Mouse side buttons work like keys, even on a mouse with only two. Open ' + w('keyboard', 'Keyboard') + ', then '
-						+ w('mouse', 'Mouse') + ' › Set buttons, and press each side button once.' },
-				{ t: 'Keybind mode', at: function () { return [act('kbmode', '.band'), $('keyrow')].filter(Boolean); }, view: { sel: pinPlace() },
-					c: { kbmode: function () { return act('kbmode', '.band'); }, layer: function () { return act('layer', '#keyrow'); } },
+					c: { mouse: function () { return act('mousepick', '.kpane'); } },
+					b: 'To allow the addon to correctly bind the appropriate keys from the mouse side buttons - please select your mouse setup from the '
+						+ w('mouse', 'Mouse') + ' menu and apply the appropriate mappings to all mouse binds in this menu.' },
+				// 0.6.18 (Harry, Oct 25, a screenshot: "the tutorial box is showing top right and not the correct part of the site")
+				// the modifier under the keyboard's grid, the keyboard open - not the slot's key row, whose lit part ran up to the
+				// band's Keybind mode and took the whole top right
+				{ t: 'Keybind mode', at: function () { return [act('layer', '.kpane')].filter(Boolean); }, view: { keys: true },
+					c: { kbmode: function () { return act('kbmode', '.band'); }, layer: function () { return act('layer', '.kpane'); } },
 					b: 'Turn on ' + w('kbmode', 'Keybind mode') + ', click a button, then press its key. Escape stops. '
 						+ 'Due to browsers having their own shortcuts (Ctrl + W, for example), the ' + w('layer', 'modifier') + ' must be selected from below the grid first.' },
 				{ t: 'Mouseover macro', at: function () { return [$('slothead'), $('macrorow')].filter(Boolean); }, view: { sel: pinPlace() },

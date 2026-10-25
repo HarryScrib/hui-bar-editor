@@ -7,7 +7,7 @@
 	var D = window.HUI_DATA, S = window.HUISerialise, Lay = window.HUILayout, Mac = window.HUIMacro, Sp = window.HUISpells;
 	var HB = window.HUIBars, W = window.HUIWow, N = window.HUINeutral;
 	var STORE = 'HUIBarEditor.v1';
-	var VERSION = 'HUI Bar Editor 0.6.17';
+	var VERSION = 'HUI Bar Editor 0.6.18';
 	var PATH = 'Interface\\AddOns\\HUIPresets\\Presets';   // (Harry, Oct 19: "just interface/addons/huipresets/presets ... no need for 2 lines")
 	var KEYS12 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
 	var QUESTION = 134400;

@@ -217,9 +217,11 @@
 		f = f || {};
 		var out = [];
 		var add = function (word) { if (word !== '') out.push('#showtooltip ' + word); };
-		if (key === 'heal' && Trim(f.spell) !== '' && Trim(f.spell2) !== '')
-			add('[known:' + Trim(f.spell) + '] ' + SpellWord(f) + '; ' + SpellWord({ spell: f.spell2, rank: f.rank2 }));
-		add(SpellWord((key === 'heal' && Trim(f.spell) === '') ? { spell: f.spell2, rank: f.rank2 } : f));
+		// (Harry, Nov 9) a Spell + Or never names the Spell alone - that showed Prayer of Mending while only Power Infusion
+		// was known; past 255 its line is bare: the game shows what the cast line casts now
+		var either = key === 'heal' && Trim(f.spell) !== '' && Trim(f.spell2) !== '';
+		if (either) add('[known:' + Trim(f.spell) + '] ' + SpellWord(f) + '; ' + SpellWord({ spell: f.spell2, rank: f.rank2 }));
+		else add(SpellWord((key === 'heal' && Trim(f.spell) === '') ? { spell: f.spell2, rank: f.rank2 } : f));
 		if (out.length === 0 && f.kind === 'trinket') add(UseWord(f));
 		out.push('#showtooltip');
 		return out;

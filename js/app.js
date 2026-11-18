@@ -809,6 +809,10 @@
 	function autoIcon() {
 		var m = st.maker;
 		if (m.iconTyped && m.icon && !(m.tpl === 'blank' && m.icon === QUESTION)) return m.icon;
+		// (Harry, Nov 9: a Spell + Or macro - Prayer of Mending, else Power Infusion - "should be showing PI if PI is learnt
+		// and PoM isn't", it showed PoM): the game draws a macro's #showtooltip spell only while the macro's icon is the ?;
+		// any other icon is drawn as it is. Both named: the ?, so the button shows whichever the macro casts now
+		if (m.tpl === 'heal' && makerSpell() && makerSpell('spell2')) return QUESTION;
 		if (m.tpl === 'heal' || m.tpl === 'cast') {
 			// 0.6.0: Mouseover's icon the Spell's, the Or's when only it is known
 			var s = makerSpell() || (m.tpl === 'heal' ? makerSpell('spell2') : null);
